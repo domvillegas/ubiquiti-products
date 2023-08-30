@@ -16,12 +16,6 @@ const DeviceList = () => {
     FilteredDevicesContext,
   );
 
-  useEffect(() => {
-    fetch('https://static.ui.com/fingerprint/ui/public.json')
-      .then((response) => response.json())
-      .then((data) => setDeviceData(data.devices));
-  }, []);
-
   const rows = () =>
     ((filteredDevices?.length && filteredDevices) || deviceData)?.map(
       //improve this type

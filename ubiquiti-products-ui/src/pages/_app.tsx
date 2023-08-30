@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import {
   DeviceDataContext,
@@ -15,7 +15,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     useState<DeviceDisplayOption>('list');
   const [filteredDevices, setFilteredDevices] = useState<DeviceData>([]);
 
-  console.log(pageProps)
+  useEffect(() => {
+    fetch('https://static.ui.com/fingerprint/ui/public.json')
+      .then((response) => response.json())
+      .then((data) => setDeviceData(data.devices));
+  }, []);
 
   return (
     <DeviceDataContext.Provider value={{ deviceData, setDeviceData }}>

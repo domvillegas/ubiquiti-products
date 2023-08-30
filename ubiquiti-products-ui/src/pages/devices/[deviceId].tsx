@@ -1,12 +1,14 @@
 import React from 'react';
-import { useParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 const Check = () => {
-  const params = useParams();
+  const router = useRouter();
 
-  console.log(params)
+  const { query } = router;
 
-  return <div style={{ marginTop: '300px' }}>cool</div>;
+  console.log(query);
+
+  return <div style={{ marginTop: '300px' }}>cool {query.deviceId}</div>;
 };
 
 export default Check;
