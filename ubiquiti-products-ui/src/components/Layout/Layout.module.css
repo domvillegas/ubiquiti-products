@@ -1,0 +1,71 @@
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background: #ffffff;
+  z-index: 1;
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4f5f6;
+  padding-right: 32px;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 125px;
+  width: 100%;
+}
+
+.searchTools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 120px 16px 32px;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar > span {
+  margin-left: 20px;
+}
+
+.productsDisplayOptions {
+  display: flex;
+  justify-content: space-between;
+  width: 125px;
+}
+
+.filterOptionsContainer {
+  position: relative;
+}
+
+.tableLabels {
+  width: 100%;
+  display: flex;
+  padding: 8px;
+  border-bottom: 1px solid #EDEDF0;
+}
+
+.emptyDiv {
+  width: 25px;
+  height: 25px;
+  margin-right: 16px;
+}
+
+.tableLabels span {
+  width: 50%;
+}
+
+.tableLabels span:last-of-type {
+  margin-left: -20px;
+}

@@ -1,0 +1,27 @@
+.navButton {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.navButton:hover {
+    transform: scale(1.075);
+}
+
+.backArrow {
+    transform: scale(-1, -1)
+}
+
+.withButtonText {
+    width: fit-content;
+    padding: 4px 8px;
+}
+
+.buttonText {
+    margin-left: 7px;
+}

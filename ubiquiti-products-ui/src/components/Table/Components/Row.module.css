@@ -1,0 +1,17 @@
+.row {
+  cursor: pointer;
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #ededf0;
+}
+
+.row:hover {
+  background: #ededf0;
+}
+
+.focus:focus {
+  outline: none;
+  border-top: 1px solid #006fff;
+  border-bottom: 1px solid #006fff;
+}

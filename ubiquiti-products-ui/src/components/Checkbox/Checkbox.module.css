@@ -1,0 +1,39 @@
+.checkbox {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 1px;
+}
+
+.checkbox input {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #B6B9C4;
+  border-radius: 4px;
+  margin: 0 8px 0 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox input:checked {
+  cursor: pointer;
+  background: #006fff;
+}
+
+.checkbox input:after {
+    content: url(../../assets/icons/checkmark.svg);
+}
+
+.checkbox input.hovered {
+    border: 1px solid #006fff;
+}
+
+.checkbox label {
+    cursor: pointer;
+}

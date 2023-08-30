@@ -1,0 +1,17 @@
+.productsDisplayOption {
+  background: transparent;
+  width: fit-content;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.productsDisplayOption img {
+  color: #838691 !important;
+}
+
+.productsDisplayOption:hover {
+  background: #f4f5f6;
+}

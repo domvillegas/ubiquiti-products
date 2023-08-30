@@ -1,0 +1,23 @@
+.deviceList {
+margin-top: 165px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.row div {
+  width: 50%;
+}
+
+.row img {
+  margin-right: 10px;
+}
+.productCardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px);
+  gap: 16px;
+  justify-content: center;
+}
