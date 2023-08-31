@@ -1,0 +1,39 @@
+.singleDevicePage {
+    margin-top: 75px;
+}
+
+.controlsRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.arrowPair {
+    display: flex;
+    justify-content: space-between;
+    width: 60px;
+}
+
+.deviceContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.imageContainer {
+    background: #F9FAFA;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deviceDetailsContainer {
+
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}

@@ -22,7 +22,7 @@ import {
   DeviceDisplayContext,
   FilteredDevicesContext,
 } from '@/contexts/contexts';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -57,6 +57,9 @@ const Layout = ({ children }: Props) => {
 
   const filterOptions = [...new Set(rawFilterOptions)];
 
+  const router = useRouter();
+  const { query } = router;
+
   return (
     <div className={inter.className}>
       <div className={styles.header}>
@@ -71,57 +74,61 @@ const Layout = ({ children }: Props) => {
           </div>
           <span className="body2">Dominick Villegas &#128516;</span>
         </div>
-        <div className={styles.searchTools}>
-          <div className={styles.searchBar}>
-            <div>
-              <SearchBar placeholder="Search" searchIndex={searchIndex} />
+        {router.pathname === '/' && (
+          <>
+            <div className={styles.searchTools}>
+              <div className={styles.searchBar}>
+                <div>
+                  <SearchBar placeholder="Search" searchIndex={searchIndex} />
+                </div>
+                <span className="body2">
+                  {
+                    ((filteredDevices?.length && filteredDevices) || deviceData)
+                      ?.length
+                  }{' '}
+                  Devices
+                </span>
+                <Link
+                  href={{
+                    pathname: '/[deviceID]/device',
+                    query: { deviceID: '1234' },
+                  }}
+                >
+                  click me
+                </Link>
+              </div>
+              <div className={styles.productsDisplayOptions}>
+                <ProductsDisplayOption
+                  iconPath={listIcon.src}
+                  iconAltText="List Icon"
+                  optionEffect={() => setDeviceDisplay('list')}
+                />
+                <ProductsDisplayOption
+                  iconPath={gridIcon.src}
+                  iconAltText="Grid Icon"
+                  optionEffect={() => setDeviceDisplay('grid')}
+                />
+                <div className={styles.filterOptionsContainer}>
+                  <ProductsDisplayOption
+                    optionName="Filter"
+                    optionEffect={() => setFilterIsActive(!filterIsActive)}
+                  />
+                  <Filter
+                    isActive={filterIsActive}
+                    filterName="Product Line"
+                    filterOptions={filterOptions}
+                  />
+                </div>
+              </div>
             </div>
-            <span className="body2">
-              {
-                ((filteredDevices?.length && filteredDevices) || deviceData)
-                  ?.length
-              }{' '}
-              Devices
-            </span>
-            <Link
-              href={{
-                pathname: '/[deviceID]/device',
-                query: { deviceID: '1234' },
-              }}
-            >
-              click me
-            </Link>
-          </div>
-          <div className={styles.productsDisplayOptions}>
-            <ProductsDisplayOption
-              iconPath={listIcon.src}
-              iconAltText="List Icon"
-              optionEffect={() => setDeviceDisplay('list')}
-            />
-            <ProductsDisplayOption
-              iconPath={gridIcon.src}
-              iconAltText="Grid Icon"
-              optionEffect={() => setDeviceDisplay('grid')}
-            />
-            <div className={styles.filterOptionsContainer}>
-              <ProductsDisplayOption
-                optionName="Filter"
-                optionEffect={() => setFilterIsActive(!filterIsActive)}
-              />
-              <Filter
-                isActive={filterIsActive}
-                filterName="Product Line"
-                filterOptions={filterOptions}
-              />
-            </div>
-          </div>
-        </div>
-        {deviceDisplay === 'list' && (
-          <div className={styles.tableLabels}>
-            <div className={styles.emptyDiv} />
-            <span className="bold">Product Line</span>
-            <span className="bold">Name</span>
-          </div>
+            {deviceDisplay === 'list' && (
+              <div className={styles.tableLabels}>
+                <div className={styles.emptyDiv} />
+                <span className="bold">Product Line</span>
+                <span className="bold">Name</span>
+              </div>
+            )}
+          </>
         )}
       </div>
       {children}
