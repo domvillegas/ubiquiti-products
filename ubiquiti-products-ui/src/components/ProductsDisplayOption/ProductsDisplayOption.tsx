@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './ProductsDisplayOption.module.css';
 
 interface Props {
@@ -14,7 +14,6 @@ const ProductsDisplayOption = ({
   iconAltText,
   optionEffect
 }: Props) => {
-  const [isActive, setIsActive] = useState(false);
 
   return (
     <div

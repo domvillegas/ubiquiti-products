@@ -12,3 +12,11 @@
 .cta:hover {
     color: #0059CC;
 }
+
+.outline {
+    color: #006FFF;
+    border: 1px solid #006FFF;
+    border-radius: 4px;
+    padding: 6px;
+    background: #ffffff;
+}

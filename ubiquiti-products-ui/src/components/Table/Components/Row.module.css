@@ -1,7 +1,6 @@
 .row {
   cursor: pointer;
   display: flex;
-  padding: 8px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid #ededf0;
 }

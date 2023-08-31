@@ -2,22 +2,40 @@
 margin-top: 165px;
 }
 
-.row {
-  display: flex;
-  align-items: center;
+.rowWrap {
+  text-decoration: none;
   width: 100%;
+  height: 100%;
+  padding: 8px;
 }
 
-.row div {
-  width: 50%;
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .row img {
   margin-right: 10px;
 }
+
+.rowData {
+  width: 100%;
+  display: flex;
+}
+
+.rowData div {
+  width: 50%;
+}
+
 .productCardGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 220px);
   gap: 16px;
   justify-content: center;
+}
+
+.productCardWrap {
+  text-decoration: none;
+  height: 100%;
 }

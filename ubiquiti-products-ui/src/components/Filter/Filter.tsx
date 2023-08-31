@@ -11,10 +11,10 @@ interface Props {
 
 const Filter = ({ isActive, filterName, filterOptions }: Props) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const { filteredDevices, setFilteredDevices } = useContext(
+  const { setFilteredDevices } = useContext(
     FilteredDevicesContext,
   );
-  const { deviceData, setDeviceData } = useContext(DeviceDataContext);
+  const { deviceData } = useContext(DeviceDataContext);
 
   useEffect(() => {
     const filterResult = deviceData?.filter((device) => {

@@ -5,7 +5,7 @@ import arrow from '../../assets/icons/arrow.svg';
 interface Props {
   direction: 'forward' | 'back';
   buttonText?: string;
-  clickEffect: () => void;
+  clickEffect?: () => void;
 }
 
 const NavButton = ({ direction, buttonText, clickEffect }: Props) => {

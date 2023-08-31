@@ -1,5 +1,5 @@
 import { DeviceData, DeviceDisplayOption } from '@/constants/types';
-import React, { Dispatch, SetStateAction, createContext } from 'react';
+import { Dispatch, SetStateAction, createContext } from 'react';
 
 export const DeviceDataContext = createContext<{
   deviceData: DeviceData;

@@ -1,9 +1,6 @@
 import React, {
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useContext,
-  useEffect,
   useState,
 } from 'react';
 import Logo from '../Logo/Logo';
@@ -16,14 +13,12 @@ import ProductsDisplayOption from '../ProductsDisplayOption/ProductsDisplayOptio
 import listIcon from '../../assets/icons/list.svg';
 import gridIcon from '../../assets/icons/grid.svg';
 import Filter from '../Filter/Filter';
-import { DeviceData } from '@/constants/types';
 import {
   DeviceDataContext,
   DeviceDisplayContext,
   FilteredDevicesContext,
 } from '@/contexts/contexts';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -44,21 +39,18 @@ const Layout = ({ children }: Props) => {
   );
 
   const searchIndex = deviceData?.map(
-    // improve this type
-    (device: any) => {
+    (device) => {
       return { item: device.product.name, lineText: device.line.name };
     },
   );
 
-  //improve this type
-  const rawFilterOptions = deviceData?.map((device: any) => {
+  const rawFilterOptions = deviceData?.map((device) => {
     return device.line.name;
   });
 
   const filterOptions = [...new Set(rawFilterOptions)];
 
   const router = useRouter();
-  const { query } = router;
 
   return (
     <div className={inter.className}>
@@ -68,7 +60,7 @@ const Layout = ({ children }: Props) => {
             <Logo
               logoPath={ubiquitiLogo.src}
               altText="Ubiquiti Logo"
-              onClickEffect={() => console.log('Placeholder effect')}
+              onClickEffect={() => router.push('/')}
             />
             <span className="body2">Devices</span>
           </div>
@@ -88,14 +80,6 @@ const Layout = ({ children }: Props) => {
                   }{' '}
                   Devices
                 </span>
-                <Link
-                  href={{
-                    pathname: '/[deviceID]/device',
-                    query: { deviceID: '1234' },
-                  }}
-                >
-                  click me
-                </Link>
               </div>
               <div className={styles.productsDisplayOptions}>
                 <ProductsDisplayOption
