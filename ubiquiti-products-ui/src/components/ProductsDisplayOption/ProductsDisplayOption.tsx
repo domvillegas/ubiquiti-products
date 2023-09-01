@@ -12,9 +12,8 @@ const ProductsDisplayOption = ({
   optionName,
   iconPath,
   iconAltText,
-  optionEffect
+  optionEffect,
 }: Props) => {
-
   return (
     <div
       className={`generalBackgroundTransition generalFocus ${styles.productsDisplayOption}`}
@@ -24,10 +23,7 @@ const ProductsDisplayOption = ({
       {optionName ? (
         <span className="body2">{optionName}</span>
       ) : (
-        <img
-          src={iconPath as string}
-          alt={iconAltText as string}
-        />
+        <img src={iconPath as string} alt={iconAltText as string} />
       )}
     </div>
   );

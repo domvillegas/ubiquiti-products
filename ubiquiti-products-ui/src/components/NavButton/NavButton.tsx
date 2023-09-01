@@ -22,7 +22,11 @@ const NavButton = ({ direction, buttonText, clickEffect }: Props) => {
         alt={`${direction} arrow`}
         aria-label={direction}
       />
-      {buttonText ? <span className={`${styles.buttonText} body2`}>{buttonText}</span> : ''}
+      {buttonText ? (
+        <span className={`${styles.buttonText} body2`}>{buttonText}</span>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

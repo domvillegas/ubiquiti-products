@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Checkbox from '../Checkbox/Checkbox';
+import React, { useContext, useEffect, useState, useRef } from 'react';
+import Checkbox, { CheckboxProps } from '../Checkbox/Checkbox';
 import styles from './Filter.module.css';
-import { FilteredDevicesContext, DeviceDataContext } from '@/contexts/contexts';
+import { useDeviceData } from '@/contexts/deviceData';
+import { useFilters } from '@/contexts/filters';
 
 interface Props {
   isActive: boolean;
@@ -10,43 +11,21 @@ interface Props {
 }
 
 const Filter = ({ isActive, filterName, filterOptions }: Props) => {
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const { setFilteredDevices } = useContext(
-    FilteredDevicesContext,
-  );
-  const { deviceData } = useContext(DeviceDataContext);
+  const { keywords, setKeywords } = useFilters();
+  const { deviceData } = useDeviceData();
 
-  useEffect(() => {
-    const filterResult = deviceData?.filter((device) => {
-      return selectedFilters.includes(device.line.name);
-    });
+  const handleCheck = (label: string) => {
+    if (!label.length) return;
 
-    setFilteredDevices(filterResult);
-  }, [selectedFilters]);
-
-  const checkboxEffectHandler = (event) => {
-    if (
-      event.target.innerText.length &&
-      !selectedFilters.includes(event.target.innerText)
-    ) {
-      setSelectedFilters((oldSelection) => [
-        ...oldSelection,
-        event.target.innerText,
-      ]);
-    } else if (
-      event.target.innerText.length &&
-      selectedFilters.includes(event.target.innerText)
-    ) {
-      setSelectedFilters(
-        selectedFilters.filter((filter) => {
-          return filter !== event.target.innerText;
+    if (keywords.includes(label)) {
+      setKeywords(
+        keywords.filter((filter) => {
+          return filter !== label;
         }),
       );
+    } else {
+      setKeywords([...keywords, label]);
     }
-  };
-
-  const resetHandler = () => {
-    setSelectedFilters([]);
   };
 
   return (
@@ -59,18 +38,18 @@ const Filter = ({ isActive, filterName, filterOptions }: Props) => {
       <div className={styles.checkBoxesContainer}>
         {filterOptions.map((option, index) => {
           return (
-            //this use of indexes as keys is safe
             <Checkbox
               className={styles.checkBox}
               key={index}
-              labelName={option}
-              checkboxEffect={(event) => checkboxEffectHandler(event)}
+              label={option}
+              checked={keywords.includes(option)}
+              onChange={(checked) => handleCheck(option)}
             />
           );
         })}
       </div>
       <div className={styles.blurFilter} />
-      <button type="button" onClick={resetHandler}>
+      <button type="button" onClick={() => setKeywords([])}>
         Reset
       </button>
     </div>

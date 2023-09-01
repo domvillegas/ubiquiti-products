@@ -1,32 +1,37 @@
 import React, { useState } from 'react';
 import styles from './Checkbox.module.css';
 
-interface Props {
-  labelName: string;
-  checkboxEffect: () => void;
+export interface CheckboxProps {
+  id?: string;
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
   className?: string;
 }
 
-const Checkbox = ({ labelName, checkboxEffect, className }: Props) => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const Checkbox = ({
+  id,
+  label,
+  checked,
+  onChange,
+  className,
+}: CheckboxProps) => {
   return (
     <div
-      onClick={checkboxEffect}
+      onClick={() => onChange(!checked)}
       className={`${styles.checkbox} ${
         className ? className : ''
       } generalFocus`}
       tabIndex={0}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
-      <div></div>
       <input
         type="checkbox"
-        id={labelName}
-        className={isHovered ? styles.hovered : ''}
+        id={id}
+        checked={checked}
+        //onChange required by React, but we are handling this need on the input's parent div
+        onChange={() => ''}
       ></input>
-      <label htmlFor={labelName}>{labelName}</label>
+      <label htmlFor={id}>{label}</label>
     </div>
   );
 };

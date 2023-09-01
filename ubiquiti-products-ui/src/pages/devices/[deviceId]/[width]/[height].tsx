@@ -2,16 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from './[height].module.css';
 import NavButton from '@/components/NavButton/NavButton';
-import { DeviceDataContext } from '@/contexts/contexts';
 import Button from '@/components/Button/Button';
 import Link from 'next/link';
 import { Url } from 'next/dist/shared/lib/router/router';
+import { useDeviceData } from '@/contexts/deviceData';
 
-const Check = () => {
+const SingleDevicePage = () => {
   const router = useRouter();
   const { query } = router;
 
-  const { deviceData } = useContext(DeviceDataContext);
+  const { deviceData } = useDeviceData();
   const [isCopied, setIsCopied] = useState(false);
   const [jsonIsVisible, setJsonIsVisible] = useState(false);
 
@@ -51,7 +51,7 @@ const Check = () => {
     return tableData.map((data) => {
       return (
         <div className={styles.row}>
-          <span className="body1 bold">{data.label}</span>
+          <span className="body1 bold nowrap">{data.label}</span>
           <span className="body2">{data.value}</span>
         </div>
       );
@@ -88,49 +88,47 @@ const Check = () => {
       <div className={styles.deviceContainer}>
         <div className={styles.imageContainer}>
           <img
-            src={`https://static.ui.com/fingerprint/ui/icons/${
-              query.deviceId
-            }_${query.width || 25}x${query.height || 25}.png`}
-            alt={singleDeviceData?.product.name}
+            src={`https://static.ui.com/fingerprint/ui/icons/${query.deviceId}_${query.width}x${query.height}.png`}
+            alt={singleDeviceData?.product?.name}
           />
         </div>
         <div className={styles.deviceDetailsContainer}>
           <div className={styles.mainDetails}>
-            <h2>{singleDeviceData?.product.name}</h2>
-            <span className="body2">{singleDeviceData?.line.name}</span>
+            <h2>{singleDeviceData?.product?.name}</h2>
+            <span className="body2">{singleDeviceData?.line?.name}</span>
           </div>
 
           {table([
-            { label: 'Product Line', value: singleDeviceData?.line.name },
-            { label: 'ID', value: singleDeviceData?.line.id },
-            { label: 'Name', value: singleDeviceData?.product.name },
+            { label: 'Product Line', value: singleDeviceData?.line?.name },
+            { label: 'ID', value: singleDeviceData?.line?.id },
+            { label: 'Name', value: singleDeviceData?.product?.name },
             {
               label: 'Short Name(s)',
-              value: singleDeviceData?.shortnames.join(', '),
+              value: singleDeviceData?.shortnames?.join(', '),
             },
             {
               label: 'Max Power',
               value: `${
-                singleDeviceData?.unifi?.network.radios.na.maxPower
-                  ? singleDeviceData?.unifi?.network.radios.na.maxPower
+                singleDeviceData?.unifi?.network?.radios?.na?.maxPower
+                  ? singleDeviceData?.unifi?.network?.radios?.na?.maxPower
                   : 'n/a'
               }`,
             },
             {
               label: 'Speed',
               value: `${
-                singleDeviceData?.unifi?.network.radios.na
-                  .maxSpeedMegabitsPerSecond
-                  ? singleDeviceData?.unifi?.network.radios.na
-                      .maxSpeedMegabitsPerSecond + ' Mbps'
+                singleDeviceData?.unifi?.network?.radios?.na
+                  ?.maxSpeedMegabitsPerSecond
+                  ? singleDeviceData?.unifi?.network?.radios?.na
+                      ?.maxSpeedMegabitsPerSecond + ' Mbps'
                   : 'n/a'
               }`,
             },
             {
               label: 'Number of Ports',
               value: `${
-                singleDeviceData?.unifi?.network.numberOfPorts
-                  ? singleDeviceData?.unifi?.network.numberOfPorts
+                singleDeviceData?.unifi?.network?.numberOfPorts
+                  ? singleDeviceData?.unifi?.network?.numberOfPorts
                   : 'n/a'
               }`,
             },
@@ -161,4 +159,4 @@ const Check = () => {
   );
 };
 
-export default Check;
+export default SingleDevicePage;

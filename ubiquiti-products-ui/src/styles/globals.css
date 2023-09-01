@@ -20,6 +20,10 @@ span {
   font-weight: 600;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .generalTransition {
   transition: 0.2s ease-in-out;
 }

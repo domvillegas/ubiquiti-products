@@ -1,8 +1,4 @@
-import React, {
-  ReactNode,
-  useContext,
-  useState,
-} from 'react';
+import React, { ReactNode, useContext, useState } from 'react';
 import Logo from '../Logo/Logo';
 import ubiquitiLogo from '../../assets/logos/ubiquiti.svg';
 import styles from './Layout.module.css';
@@ -13,12 +9,10 @@ import ProductsDisplayOption from '../ProductsDisplayOption/ProductsDisplayOptio
 import listIcon from '../../assets/icons/list.svg';
 import gridIcon from '../../assets/icons/grid.svg';
 import Filter from '../Filter/Filter';
-import {
-  DeviceDataContext,
-  DeviceDisplayContext,
-  FilteredDevicesContext,
-} from '@/contexts/contexts';
 import { useRouter } from 'next/router';
+import Loader from '../Loader/Loader';
+import { useResultsLayout } from '@/contexts/display';
+import { useDeviceData } from '@/contexts/deviceData';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,17 +26,12 @@ export const metadata: Metadata = {
 
 const Layout = ({ children }: Props) => {
   const [filterIsActive, setFilterIsActive] = useState(false);
-  const { deviceData, setDeviceData } = useContext(DeviceDataContext);
-  const { deviceDisplay, setDeviceDisplay } = useContext(DeviceDisplayContext);
-  const { filteredDevices, setFilteredDevices } = useContext(
-    FilteredDevicesContext,
-  );
+  const { deviceData } = useDeviceData();
+  const { deviceDisplay, setDeviceDisplay } = useResultsLayout();
 
-  const searchIndex = deviceData?.map(
-    (device) => {
-      return { item: device.product.name, lineText: device.line.name };
-    },
-  );
+  const searchIndex = deviceData?.map((device) => {
+    return { item: device.product.name, lineText: device.line.name };
+  });
 
   const rawFilterOptions = deviceData?.map((device) => {
     return device.line.name;
@@ -71,15 +60,11 @@ const Layout = ({ children }: Props) => {
             <div className={styles.searchTools}>
               <div className={styles.searchBar}>
                 <div>
-                  <SearchBar placeholder="Search" searchIndex={searchIndex} />
+                  <SearchBar
+                    placeholder="Search All Devices"
+                    searchIndex={searchIndex}
+                  />
                 </div>
-                <span className="body2">
-                  {
-                    ((filteredDevices?.length && filteredDevices) || deviceData)
-                      ?.length
-                  }{' '}
-                  Devices
-                </span>
               </div>
               <div className={styles.productsDisplayOptions}>
                 <ProductsDisplayOption
@@ -115,7 +100,8 @@ const Layout = ({ children }: Props) => {
           </>
         )}
       </div>
-      {children}
+      <div>{children}</div>
+      {!deviceData?.length && <Loader />}
     </div>
   );
 };

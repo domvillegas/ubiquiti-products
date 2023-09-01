@@ -18,9 +18,9 @@
 }
 
 .topSection img {
-    height: 90%;
-    display: block;
-    margin: auto;
+  height: 90%;
+  display: block;
+  margin: auto;
 }
 
 .lineTag {
@@ -42,18 +42,18 @@
 }
 
 .bottomSection span {
-    display: block;
+  display: block;
 }
 
 .productName {
-    margin-bottom: 15px;
-    color: #000000;
+  margin-bottom: 15px;
+  color: #000000;
 }
 
 .isHovered {
-    background: #F9FAFA;
+  background: #f9fafa;
 }
 
 .isHovered .topSection {
-    background: #F4F5F6 !important;
+  background: #f4f5f6 !important;
 }

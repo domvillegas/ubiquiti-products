@@ -12,7 +12,7 @@
   -webkit-appearance: none;
   width: 16px;
   height: 16px;
-  border: 1px solid #B6B9C4;
+  border: 1px solid #b6b9c4;
   border-radius: 4px;
   margin: 0 8px 0 0;
   padding: 0;
@@ -27,13 +27,14 @@
 }
 
 .checkbox input:after {
-    content: url(../../assets/icons/checkmark.svg);
+  content: url(../../assets/icons/checkmark.svg);
+  margin-bottom: 3px;
 }
 
-.checkbox input.hovered {
-    border: 1px solid #006fff;
+.checkbox:hover input {
+  border: 1px solid #006fff;
 }
 
 .checkbox label {
-    cursor: pointer;
+  cursor: pointer;
 }

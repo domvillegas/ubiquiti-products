@@ -1,6 +1,7 @@
 .searchBar {
   display: flex;
   width: 320px;
+  position: relative;
 }
 
 .inputWrapper {
@@ -42,6 +43,7 @@
   background: #ffffff;
   color: rgba(0, 0, 0, 0.7);
   word-wrap: normal;
+  overflow: scroll;
 }
 
 .withItems {
@@ -56,7 +58,7 @@
 }
 
 .dropdownItem:hover {
-  background: #F4F5F6;
+  background: #f4f5f6;
 }
 
 .searchValue {
@@ -71,15 +73,29 @@
   display: block;
 }
 
+.blurFilter {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgb(255, 255, 255)
+  );
+  height: 40px;
+  width: 320px;
+  position: absolute;
+  top: 226px;
+  pointer-events: none;
+  border-radius: 0 0 8px 8px;
+}
+
 .dropdownHidden {
-  transition: all 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
   opacity: 0;
   pointer-events: none;
   height: 1px;
 }
 
 .dropdownRevealed {
-  transition: all 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
   opacity: 1;
   pointer-events: initial;
   background: #ffffff;

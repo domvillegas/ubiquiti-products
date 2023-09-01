@@ -1,29 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  DeviceDataContext,
-  DeviceDisplayContext,
-  FilteredDevicesContext,
-} from '@/contexts/contexts';
 import Table from '@/components/Table/Table';
 import styles from './index.module.css';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import Link from 'next/link';
+import { useResultsLayout } from '@/contexts/display';
+import { useDeviceData } from '@/contexts/deviceData';
+import { useFilters } from '@/contexts/filters';
 
-const DeviceList = () => {
-  const { deviceData } = useContext(DeviceDataContext);
-  const { deviceDisplay } = useContext(DeviceDisplayContext);
-  const { filteredDevices } = useContext(FilteredDevicesContext);
-  const [isLoading, setIsLoading] = useState(true);
+const IndexPage = () => {
+  const { deviceData } = useDeviceData();
+  const { deviceDisplay } = useResultsLayout();
+  const { results: filteredDevices } = useFilters();
 
-  useEffect(() => {
-    deviceData ? setIsLoading(false) : null;
-  });
-
+  //TODO: componentize rows?
   const rows = () =>
-    ((filteredDevices?.length && filteredDevices) || deviceData)?.map((row) => {
+    filteredDevices.map((row) => {
       const largestResolution =
         row.icon.resolutions[row.icon.resolutions.length - 1];
-      console.log(largestResolution);
+
       return (
         <Link
           className={styles.rowWrap}
@@ -50,13 +44,9 @@ const DeviceList = () => {
       );
     });
 
-  const productCardData = (
-    (filteredDevices?.length && filteredDevices) ||
-    deviceData
-  )?.map((product) => {
+  const productCardData = filteredDevices.map((product) => {
     const largestResolution =
       product.icon.resolutions[product.icon.resolutions.length - 1];
-    console.log(largestResolution);
 
     return {
       productIconId: product.icon.id,
@@ -88,9 +78,11 @@ const DeviceList = () => {
 
   return (
     <div className={styles.deviceList}>
-      {isLoading ? (
-        <h1>Loading Devices...</h1>
-      ) : deviceDisplay === 'list' ? (
+      <span className="body2">
+        {((filteredDevices?.length && filteredDevices) || deviceData)?.length}{' '}
+        Results
+      </span>
+      {deviceDisplay === 'list' ? (
         <Table rows={rows()} />
       ) : (
         <div className={styles.productCardGrid}>{productCardGrid}</div>
@@ -99,4 +91,4 @@ const DeviceList = () => {
   );
 };
 
-export default DeviceList;
+export default IndexPage;

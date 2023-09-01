@@ -8,7 +8,12 @@ interface Props {
   className?: string;
 }
 
-const Button = ({ buttonText, buttonEffect, variant = 'cta', className }: Props) => {
+const Button = ({
+  buttonText,
+  buttonEffect,
+  variant = 'cta',
+  className,
+}: Props) => {
   return (
     <button
       type="button"

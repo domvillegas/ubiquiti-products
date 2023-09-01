@@ -1,13 +1,13 @@
 .logo {
-    padding: 20px;
-    background: #F4F5F6;
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    border: none;
-    cursor: pointer;
+  padding: 20px;
+  background: #f4f5f6;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
 }
 
 .logo:hover {
-    background: #ffffff;
+  background: #ffffff;
 }

@@ -1,22 +1,22 @@
 .button {
-    background: none;
-    border: none;
-    padding: 6px 2px;
-    cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px 2px;
+  cursor: pointer;
 }
 
 .cta {
-    color: #006FFF;
+  color: #006fff;
 }
 
 .cta:hover {
-    color: #0059CC;
+  color: #0059cc;
 }
 
 .outline {
-    color: #006FFF;
-    border: 1px solid #006FFF;
-    border-radius: 4px;
-    padding: 6px;
-    background: #ffffff;
+  color: #006fff;
+  border: 1px solid #006fff;
+  border-radius: 4px;
+  padding: 6px;
+  background: #ffffff;
 }
