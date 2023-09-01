@@ -16,4 +16,4 @@ yarn dev
 
 ## Things You Should Know
 
-- There are useful global styles defined in `src/styles/globals`
+- There are useful global styles defined in `src/styles/globals.css`
