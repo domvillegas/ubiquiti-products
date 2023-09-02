@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
-import Checkbox, { CheckboxProps } from '../Checkbox/Checkbox';
+import React from 'react';
+import Checkbox from '../Checkbox/Checkbox';
 import styles from './Filter.module.css';
-import { useDeviceData } from '@/contexts/deviceData';
 import { useFilters } from '@/contexts/filters';
 
 interface Props {
@@ -12,7 +11,6 @@ interface Props {
 
 const Filter = ({ isActive, filterName, filterOptions }: Props) => {
   const { keywords, setKeywords } = useFilters();
-  const { deviceData } = useDeviceData();
 
   const handleCheck = (label: string) => {
     if (!label.length) return;
@@ -49,7 +47,12 @@ const Filter = ({ isActive, filterName, filterOptions }: Props) => {
         })}
       </div>
       <div className={styles.blurFilter} />
-      <button type="button" onClick={() => setKeywords([])}>
+      <button
+        className="generalTransition"
+        disabled={!Boolean(keywords.length)}
+        type="button"
+        onClick={() => setKeywords([])}
+      >
         Reset
       </button>
     </div>

@@ -1,41 +1,66 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './SearchBar.module.css';
 import searchIcon from '../../assets/icons/search.svg';
 import { useDeviceData } from '@/contexts/deviceData';
 import { useFilters } from '@/contexts/filters';
+import Link from 'next/link';
+import { Device } from '@/constants/types';
 
 interface Props {
   placeholder: string;
-  searchIndex: { item: string; lineText: string }[] | undefined;
+  searchIndex:
+    | {
+        item: string;
+        lineText: string;
+        iconId: string;
+        iconResolutions: number[][];
+      }[]
+    | undefined;
 }
 
 const SearchBar = ({ placeholder, searchIndex }: Props) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const { setSearchTerm } = useFilters();
   const { deviceData } = useDeviceData();
 
-  const isDropdownVisible = Boolean(inputValue) && isFocused;
+  const isDropdownVisible = Boolean(inputValue);
 
   const dropdownItemsArray = searchIndex?.filter((item) => {
     const searchValueLength = inputValue.length;
     const itemSegment = item.item.substring(0, searchValueLength);
-    if (itemSegment.toLowerCase().includes(inputValue.toLowerCase())) {
+    if (
+      itemSegment
+        .toLowerCase()
+        .includes(inputValue.toLowerCase().substring(0, searchValueLength))
+    ) {
       return item;
     }
   });
 
   const dropdownItems = dropdownItemsArray?.map((item, index) => {
+    const largestIconResolution = item.iconResolutions.length - 1;
     return (
-      <div className={styles.dropdownItem} tabIndex={0} key={index}>
-        <div>
-          <span className={styles.searchValue}>{inputValue}</span>
-          <span className={styles.searchItem}>
-            {item?.item.substring(inputValue.length)}
-          </span>
+      <Link
+        className={styles.nextLink}
+        href={{
+          pathname: '/devices/[deviceId]/[width]/[height]',
+          query: {
+            deviceId: item.iconId,
+            width: item.iconResolutions[largestIconResolution][0],
+            height: item.iconResolutions[largestIconResolution][1],
+          },
+        }}
+      >
+        <div className={styles.dropdownItem} tabIndex={0} key={index}>
+          <div>
+            <span className={`${styles.searchValue} bold`}>{inputValue}</span>
+            <span className={`${styles.searchItem}} body1`}>
+              {item?.item.substring(inputValue.length)}
+            </span>
+          </div>
+          <span className="body2">{item.lineText}</span>
         </div>
-        <span className="body2">{item.lineText}</span>
-      </div>
+      </Link>
     );
   });
 
@@ -45,6 +70,8 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
       <span className={styles.noResultsText}>No Matches</span>
     </div>
   );
+
+  const focusHandler = () => {};
 
   return (
     <>
@@ -58,8 +85,6 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
           <input
             className="generalFocus"
             type="search"
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
             placeholder={placeholder}
             defaultValue={inputValue}
             onKeyDown={(e) => {

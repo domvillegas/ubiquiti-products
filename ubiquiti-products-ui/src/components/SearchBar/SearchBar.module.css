@@ -50,6 +50,10 @@
   padding-top: 7px;
 }
 
+.nextLink {
+  text-decoration: none;
+}
+
 .dropdownItem {
   cursor: pointer;
   display: flex;
@@ -62,7 +66,9 @@
 }
 
 .searchValue {
-  text-decoration: underline;
+  width: fit-content;
+  border-bottom: 1px solid #50565e;
+  color: #50565e;
 }
 
 .noResults {

@@ -1,5 +1,5 @@
 .deviceList {
-  margin-top: 165px;
+  margin-top: 185px;
 }
 
 .rowWrap {
@@ -38,4 +38,10 @@
 .productCardWrap {
   text-decoration: none;
   height: 100%;
+}
+
+.noResults {
+  color: #50565e;
+  margin-top: 300px;
+  text-align: center;
 }

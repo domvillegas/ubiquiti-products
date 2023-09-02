@@ -13,6 +13,8 @@ import { useRouter } from 'next/router';
 import Loader from '../Loader/Loader';
 import { useResultsLayout } from '@/contexts/display';
 import { useDeviceData } from '@/contexts/deviceData';
+import { useFilters } from '@/contexts/filters';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,9 +30,15 @@ const Layout = ({ children }: Props) => {
   const [filterIsActive, setFilterIsActive] = useState(false);
   const { deviceData } = useDeviceData();
   const { deviceDisplay, setDeviceDisplay } = useResultsLayout();
+  const { results } = useFilters();
 
   const searchIndex = deviceData?.map((device) => {
-    return { item: device.product.name, lineText: device.line.name };
+    return {
+      item: device.product.name,
+      lineText: device.line.name,
+      iconId: device.icon.id,
+      iconResolutions: device.icon.resolutions,
+    };
   });
 
   const rawFilterOptions = deviceData?.map((device) => {
@@ -41,6 +49,14 @@ const Layout = ({ children }: Props) => {
 
   const router = useRouter();
 
+  const logoClickHandler = (event) => {
+    if (event.view.location.pathname === '/') {
+      router.reload();
+    } else {
+      router.push('/');
+    }
+  };
+
   return (
     <div className={inter.className}>
       <div className={styles.header}>
@@ -49,8 +65,9 @@ const Layout = ({ children }: Props) => {
             <Logo
               logoPath={ubiquitiLogo.src}
               altText="Ubiquiti Logo"
-              onClickEffect={() => router.push('/')}
+              onClickEffect={logoClickHandler}
             />
+
             <span className="body2">Devices</span>
           </div>
           <span className="body2">Dominick Villegas &#128516;</span>
@@ -90,6 +107,11 @@ const Layout = ({ children }: Props) => {
                 </div>
               </div>
             </div>
+
+            <div className={styles.resultsCountContainer}>
+              <span className="body2">{results.length} Results</span>
+            </div>
+
             {deviceDisplay === 'list' && (
               <div className={styles.tableLabels}>
                 <div className={styles.emptyDiv} />

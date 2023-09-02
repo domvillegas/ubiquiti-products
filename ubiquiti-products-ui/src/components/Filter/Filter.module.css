@@ -44,6 +44,11 @@
   margin-top: 15px;
 }
 
+.filter button:disabled {
+  color: #f9b0b2;
+  cursor: not-allowed;
+}
+
 .dropdownHidden {
   transition: all 0.2s ease-in-out;
   opacity: 0;

@@ -1,16 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import Table from '@/components/Table/Table';
 import styles from './index.module.css';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import Link from 'next/link';
 import { useResultsLayout } from '@/contexts/display';
-import { useDeviceData } from '@/contexts/deviceData';
 import { useFilters } from '@/contexts/filters';
+import Button from '@/components/Button/Button';
+import { useRouter } from 'next/router';
 
 const IndexPage = () => {
-  const { deviceData } = useDeviceData();
   const { deviceDisplay } = useResultsLayout();
-  const { results: filteredDevices } = useFilters();
+  const { results: filteredDevices, setSearchTerm } = useFilters();
+
+  const router = useRouter();
 
   //TODO: componentize rows?
   const rows = () =>
@@ -77,17 +79,23 @@ const IndexPage = () => {
   });
 
   return (
-    <div className={styles.deviceList}>
-      <span className="body2">
-        {((filteredDevices?.length && filteredDevices) || deviceData)?.length}{' '}
-        Results
-      </span>
-      {deviceDisplay === 'list' ? (
-        <Table rows={rows()} />
+    <>
+      {/* If there are search results return either a list of results or a grid of results */}
+      {filteredDevices.length ? (
+        <div className={styles.deviceList}>
+          {deviceDisplay === 'list' ? (
+            <Table rows={rows()} />
+          ) : (
+            <div className={styles.productCardGrid}>{productCardGrid}</div>
+          )}
+        </div>
       ) : (
-        <div className={styles.productCardGrid}>{productCardGrid}</div>
+        <div className={styles.noResults}>
+          <h3>No Results</h3>{' '}
+          <Button buttonText="Refresh" buttonEffect={() => setSearchTerm('')} />
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
