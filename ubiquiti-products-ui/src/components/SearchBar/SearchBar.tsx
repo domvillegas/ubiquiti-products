@@ -41,7 +41,7 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
     const largestIconResolution = item.iconResolutions.length - 1;
     return (
       <Link
-      key={index}
+        key={index}
         className={styles.nextLink}
         href={{
           pathname: '/devices/[deviceId]/[width]/[height]',

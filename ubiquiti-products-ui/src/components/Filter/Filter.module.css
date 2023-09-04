@@ -13,7 +13,7 @@
 
 .checkBoxesContainer {
   padding: 1px;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 125px;
 }
 

@@ -33,7 +33,7 @@
 @media (max-width: 749px) {
   .searchTools {
     flex-direction: column;
-    padding: 16px
+    padding: 16px;
   }
 }
 

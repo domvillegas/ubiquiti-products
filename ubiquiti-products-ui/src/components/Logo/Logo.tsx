@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import styles from './Logo.module.css';
 
 interface Props {
   logoPath: string;
   altText: string;
-  onClickEffect: () => void;
+  onClickEffect: (event: { view: { location: { pathname: string } } }) => void;
 }
 
 const Logo = ({ logoPath, altText, onClickEffect }: Props) => {
@@ -12,7 +12,7 @@ const Logo = ({ logoPath, altText, onClickEffect }: Props) => {
     <button
       type="button"
       className={`${styles.logo} generalFocus generalTransition`}
-      onClick={onClickEffect}
+      onClick={onClickEffect as unknown as MouseEventHandler<HTMLButtonElement>}
     >
       <img
         className="generalTransition"

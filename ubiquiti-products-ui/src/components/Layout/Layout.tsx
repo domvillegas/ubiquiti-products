@@ -48,7 +48,9 @@ const Layout = ({ children }: Props) => {
 
   const router = useRouter();
 
-  const logoClickHandler = (event) => {
+  const logoClickHandler = (event: {
+    view: { location: { pathname: string } };
+  }) => {
     if (event.view.location.pathname === '/') {
       router.reload();
     } else {
