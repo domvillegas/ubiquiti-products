@@ -13,8 +13,12 @@ const IndexPage = () => {
 
   const rows = () =>
     filteredDevices.map((row, index) => {
+      //Dynamically selects for a device's largest possible set of image resolutions
       const largestResolution =
         row.icon.resolutions[row.icon.resolutions.length - 1];
+
+      //Dynamically selects for a device's smallest possible set of image resolutions
+      const smallestResolution = row.icon.resolutions[0];
 
       return (
         <Link
@@ -31,7 +35,7 @@ const IndexPage = () => {
         >
           <div className={styles.row}>
             <img
-              src={`https://static.ui.com/fingerprint/ui/icons/${row.icon.id}_${row.icon.resolutions[0]?.[0]}x${row.icon.resolutions[0]?.[1]}.png`}
+              src={`https://static.ui.com/fingerprint/ui/icons/${row.icon.id}_${smallestResolution?.[0]}x${smallestResolution?.[1]}.png`}
               alt={row.product.name}
             />
             <div className={styles.rowData}>
@@ -47,13 +51,15 @@ const IndexPage = () => {
     const largestResolution =
       product.icon.resolutions[product.icon.resolutions.length - 1];
 
+    const thirdSmallestResolution = product.icon.resolutions[2];
+
     return {
       productIconId: product.icon.id,
       largestIconResolution: largestResolution,
       productName: product.product.name,
       line: product.line.name,
       shortnames: product.shortnames,
-      imagePath: `https://static.ui.com/fingerprint/ui/icons/${product.icon.id}_${product.icon.resolutions[2]?.[0]}x${product.icon.resolutions[2]?.[1]}.png`,
+      imagePath: `https://static.ui.com/fingerprint/ui/icons/${product.icon.id}_${thirdSmallestResolution?.[0]}x${thirdSmallestResolution?.[1]}.png`,
     };
   });
 
@@ -78,7 +84,8 @@ const IndexPage = () => {
 
   return (
     <>
-      {/* If there are search results return either a list of results or a grid of results */}
+      {/* If there are search results return either 1) a list of results or 2) a grid of results */}
+      {/* If there are no search results return "No Results" */}
       {filteredDevices.length ? (
         <div className={styles.deviceList}>
           {deviceDisplay === 'list' ? (

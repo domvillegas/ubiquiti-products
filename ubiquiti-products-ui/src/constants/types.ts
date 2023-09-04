@@ -1,3 +1,4 @@
+// Adjust Device type if needed as the database may change
 export interface Device {
   id: string;
   unifi: {

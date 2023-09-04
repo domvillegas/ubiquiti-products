@@ -2,7 +2,6 @@ import React, { ReactNode, useState } from 'react';
 import Logo from '../Logo/Logo';
 import ubiquitiLogo from '../../assets/logos/ubiquiti.svg';
 import styles from './Layout.module.css';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import SearchBar from '../SearchBar/SearchBar';
 import ProductsDisplayOption from '../ProductsDisplayOption/ProductsDisplayOption';
@@ -25,7 +24,7 @@ const Layout = ({ children }: Props) => {
   const [filterIsActive, setFilterIsActive] = useState(false);
   const { deviceData } = useDeviceData();
   const { deviceDisplay, setDeviceDisplay } = useResultsLayout();
-  const { results, keywords } = useFilters();
+  const { results, keywords, searchTerm } = useFilters();
 
   const searchIndex = deviceData?.map((device) => {
     return {
@@ -79,7 +78,7 @@ const Layout = ({ children }: Props) => {
                     searchIndex={searchIndex}
                   />
                 </div>
-                {Boolean(keywords.length) && (
+                {Boolean(keywords.length || searchTerm.length) && (
                   <span className="body2">{results.length} Results</span>
                 )}
               </div>

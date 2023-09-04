@@ -2,7 +2,7 @@ import { Device } from '@/constants/types';
 import { ReactNode, createContext, useContext, useState } from 'react';
 import { useDeviceData } from './deviceData';
 
-export interface FiltersContextValue {
+interface FiltersContextValue {
   searchTerm: string;
   keywords: string[];
   results: Device[];
@@ -14,8 +14,8 @@ export const FiltersContext = createContext<FiltersContextValue>({
   searchTerm: '',
   keywords: [],
   results: [],
-  setSearchTerm: (term) => {},
-  setKeywords: (keywords) => {},
+  setSearchTerm: () => {},
+  setKeywords: () => {},
 });
 
 export const FiltersProvider = ({ children }: { children: ReactNode }) => {
@@ -29,6 +29,8 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
         keywords.includes(device.line.name) || !keywords.length;
 
       const searchTermLength = searchTerm.length;
+      //Trims the device name to match the length of the user's input
+      //Without this, irrelevant devices will be displayed
       const deviceNameSegment = device.product.name.substring(
         0,
         searchTermLength,

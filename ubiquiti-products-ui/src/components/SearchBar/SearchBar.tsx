@@ -27,6 +27,8 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
   const isDropdownVisible = Boolean(inputValue) && !clickedAway;
 
   const closeDropdown = ({ target }: MouseEvent) => {
+    //This if statement checks to see if the clicked element is either
+    //the search bar or the dropdown menu
     if (
       dropdownRef.current &&
       searchBarRef.current &&
@@ -43,6 +45,9 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
 
   const dropdownItemsArray = searchIndex?.filter((item) => {
     const searchValueLength = inputValue.length;
+
+    //Trims the device's name to match the length of the user's input
+    //Without this, irrelevant devices will be displayed
     const itemSegment = item.item.substring(0, searchValueLength);
     if (
       itemSegment
@@ -54,6 +59,7 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
   });
 
   const dropdownItems = dropdownItemsArray?.map((item, index) => {
+    //This variable dynamically selects for a device's largest possible set of image resolutions
     const largestIconResolution = item.iconResolutions.length - 1;
     return (
       <Link

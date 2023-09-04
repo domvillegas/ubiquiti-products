@@ -12,6 +12,7 @@ const Logo = ({ logoPath, altText, onClickEffect }: Props) => {
     <button
       type="button"
       className={`${styles.logo} generalFocus generalTransition`}
+      //TODO: Improve this type
       onClick={onClickEffect as unknown as MouseEventHandler<HTMLButtonElement>}
     >
       <img

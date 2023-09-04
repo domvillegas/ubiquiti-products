@@ -13,6 +13,7 @@ const Filter = ({ isActive, filterName, filterOptions }: Props) => {
   const { keywords, setKeywords } = useFilters();
 
   const handleCheck = (label: string) => {
+    //Database could return an empty string
     if (!label.length) return;
 
     if (keywords.includes(label)) {
@@ -41,7 +42,7 @@ const Filter = ({ isActive, filterName, filterOptions }: Props) => {
               key={index}
               label={option}
               checked={keywords.includes(option)}
-              onChange={(checked) => handleCheck(option)}
+              onChange={() => handleCheck(option)}
             />
           );
         })}

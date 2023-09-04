@@ -33,6 +33,7 @@ const SingleDevicePage = () => {
   const adjacentDevicePath = (direction: 'forward' | 'back') => {
     const { previousDevice, nextDevice } = adjacentDevices;
     if (direction === 'back' && previousDevice) {
+      //This variable dynamically selects for a device's largest possible set of image resolutions
       const largestResolution =
         previousDevice?.icon.resolutions[
           previousDevice?.icon.resolutions.length - 1
