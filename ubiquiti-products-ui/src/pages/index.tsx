@@ -59,9 +59,10 @@ const IndexPage = () => {
     };
   });
 
-  const productCardGrid = productCardData?.map((data) => {
+  const productCardGrid = productCardData?.map((data, index) => {
     return (
       <Link
+        key={index}
         className={styles.productCardWrap}
         href={{
           pathname: '/devices/[deviceId]/[width]/[height]',
