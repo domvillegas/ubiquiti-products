@@ -48,9 +48,9 @@ const SingleDevicePage = () => {
   const deviceJSON = JSON.stringify(singleDeviceData, null, 2);
 
   const table = (tableData: { label: string; value: string | undefined }[]) => {
-    return tableData.map((data) => {
+    return tableData.map((data, index) => {
       return (
-        <div className={styles.row}>
+        <div key={index} className={styles.row}>
           <span className="body1 bold nowrap">{data.label}</span>
           <span className="body2">{data.value}</span>
         </div>
@@ -75,11 +75,13 @@ const SingleDevicePage = () => {
 
         <div className={styles.arrowPair}>
           <NavButton
+            disabled={!Boolean(adjacentDevices.previousDevice)}
             direction="back"
             clickEffect={() => navButtonClickHandler('back')}
           />
 
           <NavButton
+            disabled={!Boolean(adjacentDevices.nextDevice)}
             direction="forward"
             clickEffect={() => navButtonClickHandler('forward')}
           />

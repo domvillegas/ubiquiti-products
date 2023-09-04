@@ -6,14 +6,17 @@ interface Props {
   direction: 'forward' | 'back';
   buttonText?: string;
   clickEffect?: () => void;
+  disabled?: boolean;
 }
 
-const NavButton = ({ direction, buttonText, clickEffect }: Props) => {
+const NavButton = ({ direction, buttonText, clickEffect, disabled }: Props) => {
   return (
-    <div
+    <button
+      type="button"
+      disabled={disabled}
       className={`shadow generalTransition ${styles.navButton} ${
         buttonText ? styles.withButtonText : ''
-      }`}
+      } ${disabled && styles.disabled}`}
       onClick={clickEffect}
     >
       <img
@@ -27,7 +30,7 @@ const NavButton = ({ direction, buttonText, clickEffect }: Props) => {
       ) : (
         ''
       )}
-    </div>
+    </button>
   );
 };
 

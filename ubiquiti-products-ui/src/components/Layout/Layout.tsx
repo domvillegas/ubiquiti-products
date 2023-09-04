@@ -14,7 +14,6 @@ import Loader from '../Loader/Loader';
 import { useResultsLayout } from '@/contexts/display';
 import { useDeviceData } from '@/contexts/deviceData';
 import { useFilters } from '@/contexts/filters';
-import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,7 +29,7 @@ const Layout = ({ children }: Props) => {
   const [filterIsActive, setFilterIsActive] = useState(false);
   const { deviceData } = useDeviceData();
   const { deviceDisplay, setDeviceDisplay } = useResultsLayout();
-  const { results } = useFilters();
+  const { results, keywords } = useFilters();
 
   const searchIndex = deviceData?.map((device) => {
     return {
@@ -82,6 +81,9 @@ const Layout = ({ children }: Props) => {
                     searchIndex={searchIndex}
                   />
                 </div>
+                {Boolean(keywords.length) && (
+                  <span className="body2">{results.length} Results</span>
+                )}
               </div>
               <div className={styles.productsDisplayOptions}>
                 <ProductsDisplayOption
@@ -106,10 +108,6 @@ const Layout = ({ children }: Props) => {
                   />
                 </div>
               </div>
-            </div>
-
-            <div className={styles.resultsCountContainer}>
-              <span className="body2">{results.length} Results</span>
             </div>
 
             {deviceDisplay === 'list' && (

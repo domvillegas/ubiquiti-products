@@ -14,7 +14,11 @@ const Logo = ({ logoPath, altText, onClickEffect }: Props) => {
       className={`${styles.logo} generalFocus generalTransition`}
       onClick={onClickEffect}
     >
-      <img src={logoPath as string} alt={altText as string} />
+      <img
+        className="generalTransition"
+        src={logoPath as string}
+        alt={altText as string}
+      />
     </button>
   );
 };

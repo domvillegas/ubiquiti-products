@@ -11,3 +11,13 @@
 .logo:hover {
   background: #ffffff;
 }
+
+.logo img {
+  filter: invert(33%) sepia(23%) saturate(219%) hue-rotate(175deg)
+    brightness(88%) contrast(86%);
+}
+
+.logo:hover img {
+  filter: invert(28%) sepia(78%) saturate(4032%) hue-rotate(207deg)
+    brightness(104%) contrast(101%);
+}

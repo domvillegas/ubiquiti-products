@@ -1,5 +1,11 @@
 .deviceList {
-  margin-top: 185px;
+  margin-top: 160px;
+}
+
+@media (max-width: 749px) {
+  .deviceList {
+    margin-top: 190px;
+  }
 }
 
 .rowWrap {

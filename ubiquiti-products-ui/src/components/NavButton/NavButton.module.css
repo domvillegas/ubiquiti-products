@@ -7,10 +7,20 @@
   align-items: center;
   justify-content: center;
   background: #ffffff;
+  border: none;
+}
+
+.disabled {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .navButton:hover {
   transform: scale(1.075);
+}
+
+.navButton:disabled {
+  cursor: not-allowed;
 }
 
 .backArrow {

@@ -12,6 +12,8 @@
 
 .loader img {
   width: 75px;
+  filter: invert(28%) sepia(78%) saturate(4032%) hue-rotate(207deg)
+    brightness(104%) contrast(101%);
 }
 
 @keyframes rotate {

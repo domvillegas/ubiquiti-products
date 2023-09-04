@@ -30,6 +30,13 @@
   padding: 16px 120px 16px 32px;
 }
 
+@media (max-width: 749px) {
+  .searchTools {
+    flex-direction: column;
+    padding: 16px
+  }
+}
+
 .searchBar {
   display: flex;
   align-items: center;
@@ -47,13 +54,6 @@
 
 .filterOptionsContainer {
   position: relative;
-}
-
-.resultsCountContainer {
-  width: 350px;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
 }
 
 .tableLabels {

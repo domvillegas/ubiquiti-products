@@ -12,16 +12,15 @@ const IndexPage = () => {
   const { deviceDisplay } = useResultsLayout();
   const { results: filteredDevices, setSearchTerm } = useFilters();
 
-  const router = useRouter();
-
   //TODO: componentize rows?
   const rows = () =>
-    filteredDevices.map((row) => {
+    filteredDevices.map((row, index) => {
       const largestResolution =
         row.icon.resolutions[row.icon.resolutions.length - 1];
 
       return (
         <Link
+          key={index}
           className={styles.rowWrap}
           href={{
             pathname: '/devices/[deviceId]/[width]/[height]',

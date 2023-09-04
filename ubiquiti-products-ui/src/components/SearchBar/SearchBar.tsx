@@ -41,6 +41,7 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
     const largestIconResolution = item.iconResolutions.length - 1;
     return (
       <Link
+      key={index}
         className={styles.nextLink}
         href={{
           pathname: '/devices/[deviceId]/[width]/[height]',
@@ -51,7 +52,7 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
           },
         }}
       >
-        <div className={styles.dropdownItem} tabIndex={0} key={index}>
+        <div className={styles.dropdownItem} tabIndex={0}>
           <div>
             <span className={`${styles.searchValue} bold`}>{inputValue}</span>
             <span className={`${styles.searchItem}} body1`}>
@@ -70,8 +71,6 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
       <span className={styles.noResultsText}>No Matches</span>
     </div>
   );
-
-  const focusHandler = () => {};
 
   return (
     <>
