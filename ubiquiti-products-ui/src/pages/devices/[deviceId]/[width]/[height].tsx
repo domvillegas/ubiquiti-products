@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import styles from './[height].module.css';
 import NavButton from '@/components/NavButton/NavButton';
@@ -14,6 +14,8 @@ const SingleDevicePage = () => {
   const { deviceData } = useDeviceData();
   const [isCopied, setIsCopied] = useState(false);
   const [jsonIsVisible, setJsonIsVisible] = useState(false);
+
+  const jsonRef = useRef(null);
 
   const rawSingleDeviceData = deviceData?.filter((device) => {
     return device.icon.id === query.deviceId;
@@ -65,6 +67,13 @@ const SingleDevicePage = () => {
     if (adjacentDevicePath(direction)) {
       router.push(adjacentDevicePath(direction) as Url);
     }
+  };
+
+  const jsonButtonClickHandler = () => {
+    setJsonIsVisible(!jsonIsVisible);
+    setTimeout(() => {
+      window.scrollTo({ top: 9999, behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -141,11 +150,12 @@ const SingleDevicePage = () => {
               className={styles.jsonButton}
               variant="cta"
               buttonText="See All Details as JSON"
-              buttonEffect={() => setJsonIsVisible(!jsonIsVisible)}
+              buttonEffect={jsonButtonClickHandler}
             />
           </div>
         </div>
       </div>
+      <div ref={jsonRef} />
       {jsonIsVisible && (
         <div className={styles.deviceJsonContainer}>
           <pre>{deviceJSON}</pre>
