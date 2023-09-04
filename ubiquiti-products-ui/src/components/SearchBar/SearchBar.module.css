@@ -25,6 +25,17 @@
   padding: 0 10px 0 35px;
 }
 
+@media (max-width: 749px) {
+  .searchBar {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .inputWrapper input {
+    min-width: 100%;
+  }
+}
+
 .inputWrapper input::placeholder {
   color: rgba(0, 0, 0, 45%);
 }

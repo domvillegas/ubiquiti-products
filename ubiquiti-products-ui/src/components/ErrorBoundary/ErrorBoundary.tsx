@@ -1,4 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
+import styles from './ErrorBoundary.module.css';
+import Button from '@/components/Button/Button';
 
 interface Props {
   children: ReactNode;
@@ -24,18 +26,16 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div>
+        <div className={styles.errorBoundary}>
           <h1>An Error Occured</h1>
           <p>
             Try again by clicking the button below or contact our web developer
             team at ubiquitiwebdevsupport@ui.com.
           </p>
-          <button
-            type="button"
-            onClick={() => this.setState({ hasError: false })}
-          >
-            Try Again
-          </button>
+          <Button
+            buttonEffect={() => this.setState({ hasError: false })}
+            buttonText="Try Again"
+          />
         </div>
       );
     }

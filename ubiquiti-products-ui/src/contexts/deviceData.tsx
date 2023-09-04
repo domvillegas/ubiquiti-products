@@ -1,4 +1,4 @@
-import { DeviceData, DeviceDisplayOption } from '@/constants/types';
+import { DeviceData } from '@/constants/types';
 import {
   Dispatch,
   ReactNode,

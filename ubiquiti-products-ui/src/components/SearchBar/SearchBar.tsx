@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './SearchBar.module.css';
 import searchIcon from '../../assets/icons/search.svg';
-import { useDeviceData } from '@/contexts/deviceData';
 import { useFilters } from '@/contexts/filters';
 import Link from 'next/link';
-import { Device } from '@/constants/types';
 
 interface Props {
   placeholder: string;
@@ -21,9 +19,27 @@ interface Props {
 const SearchBar = ({ placeholder, searchIndex }: Props) => {
   const [inputValue, setInputValue] = useState('');
   const { setSearchTerm } = useFilters();
-  const { deviceData } = useDeviceData();
+  const [clickedAway, setClickedAway] = useState(false);
 
-  const isDropdownVisible = Boolean(inputValue);
+  const searchBarRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const isDropdownVisible = Boolean(inputValue) && !clickedAway;
+
+  const closeDropdown = ({ target }: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      searchBarRef.current &&
+      !dropdownRef.current.contains(target as Node) &&
+      !searchBarRef.current.contains(target as Node)
+    ) {
+      setClickedAway(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', closeDropdown);
+  }, []);
 
   const dropdownItemsArray = searchIndex?.filter((item) => {
     const searchValueLength = inputValue.length;
@@ -74,7 +90,11 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
 
   return (
     <>
-      <div className={styles.searchBar}>
+      <div
+        ref={searchBarRef}
+        className={styles.searchBar}
+        onClick={() => setClickedAway(false)}
+      >
         <img
           src={searchIcon.src}
           alt="Magnifying Glass"
@@ -91,6 +111,7 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
                 e.preventDefault();
                 e.currentTarget.blur();
                 setSearchTerm(inputValue);
+                setClickedAway(true);
               }
             }}
             onChange={(e) => setInputValue(e.currentTarget.value)}
@@ -98,6 +119,7 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
         </div>
       </div>
       <div
+        ref={dropdownRef}
         className={`${styles.dropdown} ${
           dropdownItems?.length ? styles.withItems : ''
         } ${

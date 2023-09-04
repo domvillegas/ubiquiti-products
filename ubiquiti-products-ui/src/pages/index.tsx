@@ -6,13 +6,11 @@ import Link from 'next/link';
 import { useResultsLayout } from '@/contexts/display';
 import { useFilters } from '@/contexts/filters';
 import Button from '@/components/Button/Button';
-import { useRouter } from 'next/router';
 
 const IndexPage = () => {
   const { deviceDisplay } = useResultsLayout();
   const { results: filteredDevices, setSearchTerm } = useFilters();
 
-  //TODO: componentize rows?
   const rows = () =>
     filteredDevices.map((row, index) => {
       const largestResolution =

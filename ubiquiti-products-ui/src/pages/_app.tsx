@@ -6,19 +6,27 @@ import '../styles/globals.css';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import { ResultsLayoutProvider } from '@/contexts/display';
 import { FiltersProvider } from '@/contexts/filters';
+import Head from 'next/head';
+import favicon from '../assets/logos/favicon.ico';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <DeviceDataProvider>
-      <FiltersProvider>
-        <ResultsLayoutProvider>
-          <Layout>
-            <ErrorBoundary>
-              <Component {...pageProps} />
-            </ErrorBoundary>
-          </Layout>
-        </ResultsLayoutProvider>
-      </FiltersProvider>
-    </DeviceDataProvider>
+    <>
+      <Head>
+        <title>Ubiquiti Devices</title>
+        <link rel="shortcut icon" href={favicon.src} />
+      </Head>
+      <DeviceDataProvider>
+        <FiltersProvider>
+          <ResultsLayoutProvider>
+            <Layout>
+              <ErrorBoundary>
+                <Component {...pageProps} />
+              </ErrorBoundary>
+            </Layout>
+          </ResultsLayoutProvider>
+        </FiltersProvider>
+      </DeviceDataProvider>
+    </>
   );
 }

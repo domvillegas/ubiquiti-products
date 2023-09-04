@@ -1,10 +1,10 @@
 .deviceList {
-  margin-top: 160px;
+  margin-top: 159px;
 }
 
 @media (max-width: 749px) {
   .deviceList {
-    margin-top: 190px;
+    margin-top: 200px;
   }
 }
 

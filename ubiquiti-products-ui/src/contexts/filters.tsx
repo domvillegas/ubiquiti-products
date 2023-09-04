@@ -27,11 +27,16 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
     deviceData?.filter((device) => {
       const isKeywordMatch =
         keywords.includes(device.line.name) || !keywords.length;
+
+      const searchTermLength = searchTerm.length;
+      const deviceNameSegment = device.product.name.substring(
+        0,
+        searchTermLength,
+      );
+
       return (
         isKeywordMatch &&
-        device.product.name
-          .toLocaleLowerCase()
-          .includes(searchTerm.toLowerCase())
+        deviceNameSegment.toLocaleLowerCase().includes(searchTerm.toLowerCase())
       );
     }) || [];
 

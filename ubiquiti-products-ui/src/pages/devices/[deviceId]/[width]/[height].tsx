@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from './[height].module.css';
 import NavButton from '@/components/NavButton/NavButton';
@@ -135,12 +135,14 @@ const SingleDevicePage = () => {
               }`,
             },
           ])}
-          <Button
-            className={styles.jsonButton}
-            variant="cta"
-            buttonText="See All Details as JSON"
-            buttonEffect={() => setJsonIsVisible(!jsonIsVisible)}
-          />
+          <div className={styles.jsonButtonContainer}>
+            <Button
+              className={styles.jsonButton}
+              variant="cta"
+              buttonText="See All Details as JSON"
+              buttonEffect={() => setJsonIsVisible(!jsonIsVisible)}
+            />
+          </div>
         </div>
       </div>
       {jsonIsVisible && (

@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Logo from '../Logo/Logo';
 import ubiquitiLogo from '../../assets/logos/ubiquiti.svg';
 import styles from './Layout.module.css';
@@ -20,10 +20,6 @@ const inter = Inter({ subsets: ['latin'] });
 interface Props {
   children: ReactNode;
 }
-
-export const metadata: Metadata = {
-  title: 'Ubiquiti Products UI',
-};
 
 const Layout = ({ children }: Props) => {
   const [filterIsActive, setFilterIsActive] = useState(false);

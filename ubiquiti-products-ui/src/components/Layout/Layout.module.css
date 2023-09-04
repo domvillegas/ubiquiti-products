@@ -46,10 +46,22 @@
   margin-left: 20px;
 }
 
+@media (max-width: 749px) {
+  .searchBar > span {
+    margin-left: 10px;
+  }
+}
+
 .productsDisplayOptions {
   display: flex;
   justify-content: space-between;
   width: 125px;
+}
+
+@media (max-width: 749px) {
+  .productsDisplayOptions {
+    margin-top: 10px;
+  }
 }
 
 .filterOptionsContainer {
