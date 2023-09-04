@@ -11,41 +11,40 @@ const IndexPage = () => {
   const { deviceDisplay } = useResultsLayout();
   const { results: filteredDevices, setSearchTerm } = useFilters();
 
-  const rows = () =>
-    filteredDevices.map((row, index) => {
-      //Dynamically selects for a device's largest possible set of image resolutions
-      const largestResolution =
-        row.icon.resolutions[row.icon.resolutions.length - 1];
+  const rows = filteredDevices.map((row, index) => {
+    //Dynamically selects for a device's largest possible set of image resolutions
+    const largestResolution =
+      row.icon.resolutions[row.icon.resolutions.length - 1];
 
-      //Dynamically selects for a device's smallest possible set of image resolutions
-      const smallestResolution = row.icon.resolutions[0];
+    //Dynamically selects for a device's smallest possible set of image resolutions
+    const smallestResolution = row.icon.resolutions[0];
 
-      return (
-        <Link
-          key={index}
-          className={styles.rowWrap}
-          href={{
-            pathname: '/devices/[deviceId]/[width]/[height]',
-            query: {
-              deviceId: row.icon.id,
-              width: largestResolution?.[0],
-              height: largestResolution?.[1],
-            },
-          }}
-        >
-          <div className={styles.row}>
-            <img
-              src={`https://static.ui.com/fingerprint/ui/icons/${row.icon.id}_${smallestResolution?.[0]}x${smallestResolution?.[1]}.png`}
-              alt={row.product.name}
-            />
-            <div className={styles.rowData}>
-              <div className="body1">{row.line.name}</div>
-              <div className="body2">{row.product.name}</div>
-            </div>
+    return (
+      <Link
+        key={index}
+        className={styles.rowWrap}
+        href={{
+          pathname: '/devices/[deviceId]/[width]/[height]',
+          query: {
+            deviceId: row.icon.id,
+            width: largestResolution?.[0],
+            height: largestResolution?.[1],
+          },
+        }}
+      >
+        <div className={styles.row}>
+          <img
+            src={`https://static.ui.com/fingerprint/ui/icons/${row.icon.id}_${smallestResolution?.[0]}x${smallestResolution?.[1]}.png`}
+            alt={row.product.name}
+          />
+          <div className={styles.rowData}>
+            <div className="body1">{row.line.name}</div>
+            <div className="body2">{row.product.name}</div>
           </div>
-        </Link>
-      );
-    });
+        </div>
+      </Link>
+    );
+  });
 
   const productCardData = filteredDevices.map((product) => {
     const largestResolution =
@@ -89,7 +88,7 @@ const IndexPage = () => {
       {filteredDevices.length ? (
         <div className={styles.deviceList}>
           {deviceDisplay === 'list' ? (
-            <Table rows={rows()} />
+            <Table rows={rows} />
           ) : (
             <div className={styles.productCardGrid}>{productCardGrid}</div>
           )}
