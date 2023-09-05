@@ -166,6 +166,9 @@ const SingleDevicePage = () => {
             buttonEffect={() => {
               navigator.clipboard.writeText(deviceJSON);
               setIsCopied(true);
+              setTimeout(() => {
+                setIsCopied(false);
+              }, 1500);
             }}
           />
         </div>
