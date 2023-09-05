@@ -4,7 +4,7 @@ import searchIcon from '../../assets/icons/search.svg';
 import { useFilters } from '@/contexts/filters';
 import Link from 'next/link';
 
-interface Props {
+export interface Props {
   placeholder: string;
   searchIndex:
     | {
@@ -131,6 +131,7 @@ const SearchBar = ({ placeholder, searchIndex }: Props) => {
         } ${
           isDropdownVisible ? styles.dropdownRevealed : styles.dropdownHidden
         } shadow`}
+        data-testid="SearchBar-dropdown"
       >
         {dropdownItems?.length ? dropdownItems : noResults}
       </div>
